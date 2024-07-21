@@ -151,6 +151,8 @@
 
 ## @Transactional 동작 원리
 
+- @Transactional 어노테이션을 메소드 또는 클래스에 명시하면 AOP를 통해 Target이 상속하고 있는 인터페이스 도는 Target 객체를 상속한 Proxy 객체가 생성되며 Proxy 객체의 메소드를 호출하면 Target 전 후로 트랜잭션 처리를 수행한다.
+
 ## JPA N+1 문제
 
 - 1번의 쿼리를 날렸을 때 의도하지 않은 N번의 쿼리가 추가적으로 실행되는 것을 의미
@@ -164,4 +166,9 @@
 
 ## Mybatis에서 객체와 매핑되는 과정
 
--
+- Java 객체와 SQL 데이터베이스 간의 매핑을 처리하는 Persistent 프레임워크
+- MyBatis는 SQL을 직접 잓어하고 데이터베이스오 상호작용하는 방식을 취함
+- XML 매퍼 파일을 통해서 SQL 쿼리와 매핑 규칙을 정의한다.
+- SQL 매핑 어노테이션을 통해 직접 정의
+- SqlSession
+- Mapper 인터페이스 : 매퍼 XML 파일과 연결되는 Java 인터페이스
