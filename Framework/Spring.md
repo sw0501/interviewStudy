@@ -98,7 +98,7 @@
 
 ## Filter, Interceptor, AOP
 
-- ### Filter
+- ### Filter (Dispathcher Servlet 전 수행)
   - 요청과 응답을 거른 뒤 정제하는 역할
   - Spring Container가 아닌 톰캣과 같은 웹 컨테이너에 의해 관리 됨
   - 디스패처 서블릿에 요청이 전달되기 전 / 후에 url 패턴에 맞는 모든 요청에 대해 부가 작업을 처리할 수 있는 기능 제공
@@ -107,11 +107,11 @@
     - 모든 요청에 대한 로깅 또는 검사
     - 이미지/데이터 압축
     - Spring과 분리되어야 하는 기능
-- ### Interceptor
+- ### Interceptor (Dispathcher Servlet에서 컨트롤러 호출 하기 전 전 수행)
   - 요청에 대한 작업 전 / 후로 가로채 요청과 응답을 참조하거나 가공하는 역할
   - Spring Context에서 동작
   - 디스패처 서블릿이 Controller를 호출하기 전 / 후에 인터셉터가 끼어들어 응답을 참조하거나 가공할 수 있는 기능 제공
-- ### AOP
+- ### AOP (메소드 동작 전후 과정에 부가 로직 처리)
   - 비즈니스 로직에 있는 공통 관심사항을 분리하여 각각 모듈화 하는 것
   - 공통 모듈인 인증, 로깅, 트랜잭션 처리에 용이하다.
 
@@ -139,7 +139,7 @@
   - Value Object : 실제 사용할 데이터만을 저장하는 객체
 - ### BO (가변)
   - Business Object : DAO를 활용해 비즈니스 로직을 처리하는 객체 (Service에 해당)
-- ### DAO ()
+- ### DAO (불변)
   - DB의 데이터 접근을 하기 위한 객체 (Repositoy or Mapper에 해당)
 - ### DTO (가변)
   - 각 계층간의 데이터 교환을 위한 객채 (계층에는 Controller, View, 등)
@@ -157,11 +157,28 @@
 
 ## 프로토타입 빈
 
-- 일반적으로 Spring에서 빈은 싱글톤 패턴이 적용되어 있는데 프로토타입 빈으로 설정할 경우 컨테이너에게 빈을 요청할 때 마다 매번 새로운 객체를 생성하여 반환해준다.
+- 일반적으로 Spring에서 빈은 싱글톤 패턴이 적용되어 있는데 스코프를 프로토타입으로 설정할 경우 컨테이너에게 빈을 요청할 때 마다 매번 새로운 객체를 생성하여 반환해준다.
 
 ## @Transactional 동작 원리
 
 - @Transactional 어노테이션을 메소드 또는 클래스에 명시하면 AOP를 통해 Target이 상속하고 있는 인터페이스 도는 Target 객체를 상속한 Proxy 객체가 생성되며 Proxy 객체의 메소드를 호출하면 Target 전 후로 트랜잭션 처리를 수행한다.
+
+## ORM?
+
+- Object Relational Mapping으로, 객체 관계 매핑을 의미
+- Java에서는 Entity 객체를 활용하여 DB 테이블과 매핑하는 Spring Data JPA 주로 사용
+
+## ORM의 장점
+
+- 객체 지향적으로 DB 조작 가능
+- SQL 작성하지 않아 개발 비용 감소
+- 코드 가독성 및 재사용성, 유지보수성 좋아짐
+- 특정 DB에 대한 종속성 감소
+
+## ORM JPA Spring Data JPA 차이
+
+- JPA는 자바 진영 표준 ORM, 인터페이스의 집합
+- JPA의 대표적인 구현체인 Hibernate를 개발자가 사용하기 쉽게 모듈화한 것이 Spring Data JPA이다
 
 ## JPA N+1 문제
 
